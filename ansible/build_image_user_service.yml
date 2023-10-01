@@ -1,0 +1,14 @@
+---
+- hosts: ansible
+
+  tasks:
+  - name: create docker image
+    command: docker build -t twitter-clone-user-service:latest .
+    args: 
+     chdir: /opt/docker
+
+  - name: create tag to push onto dockerhub
+    command: docker tag twitter-clone-user-service:latest jamongx/twitter-clone-user-service:latest
+
+  - name: push docker image
+    command: docker push jamongx/twitter-clone-user-service:latest
